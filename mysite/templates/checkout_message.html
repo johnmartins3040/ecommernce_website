@@ -1,0 +1,115 @@
+{% extends "base_cart.html" %}
+
+{% block style %}
+<style>
+/* Center container */
+.checkout-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+/* Card style */
+.checkout-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.checkout-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Title */
+.checkout-card h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Message */
+.checkout-card p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* Buttons container */
+.checkout-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Button base */
+.checkout-buttons .btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+/* Primary button */
+.checkout-buttons .btn-primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.checkout-buttons .btn-primary:hover {
+  background: #0056b3;
+}
+
+/* Secondary button */
+.checkout-buttons .btn-secondary {
+  background: #f1f1f1;
+  color: #333;
+}
+
+.checkout-buttons .btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+/* Responsive (side-by-side on large screens) */
+@media (min-width: 600px) {
+  .checkout-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .checkout-buttons .btn {
+    flex: 1;
+  }
+}
+</style>
+
+{% endblock %}
+
+{% block dontshow %}{% endblock %}
+
+{% block content %}
+<div class="checkout-wrapper">
+  <div class="checkout-card">
+    <!-- Title -->
+    <h2>{{ title }}</h2>
+
+    <!-- Message -->
+    <p>{{ message }}</p>
+
+    <!-- Buttons -->
+    <div class="checkout-buttons">
+      <a href="{% url 'checkout' %}" class="btn btn-primary">Back to Checkout</a>
+      <a href="{% url 'home' %}" class="btn btn-secondary">Continue Shopping</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

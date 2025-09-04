@@ -1,0 +1,141 @@
+{% extends 'base_cart.html' %}
+{% block style %}
+<style>
+  /* Container padding */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    /* margin-top: 100px; */
+  }
+
+  /* Flex layout for product section */
+  .product-row {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+  }
+
+  /* Product image styles */
+  .product-image img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    max-height: 400px;
+  }
+
+  /* Product details styling */
+  .product-details {
+    flex: 1;
+  }
+
+  .product-details h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .product-details p.category {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+
+  .product-details h3.price {
+    color: #007bff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .product-details p.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  /* Add to cart button */
+  .btn-add-cart {
+    background-color: #28a745;
+    color: white;
+    padding: 15px 25px;
+    font-size: 1.25rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-add-cart:hover {
+    background-color: #218838;
+  }
+
+  /* Meta info styling */
+  .meta-info {
+    color: #999;
+    margin-top: 30px;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive - Stack columns on small screens */
+  @media (max-width: 768px) {
+    .product-row {
+      flex-direction: column;
+    }
+
+    .product-image img {
+      max-height: none;
+    }
+
+    .product-details h1 {
+      font-size: 2rem;
+    }
+
+    .product-details h3.price {
+      font-size: 1.75rem;
+    }
+
+    .btn-add-cart {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 1.1rem;
+    }
+  }
+</style>
+{% endblock %}
+{% load static %}
+
+<!-- {% block dontshowserach %}{% endblock %} -->
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded" style="min-height: 300px; object-fit: cover;">
+            {% else %}
+                <img src="{% static 'img/default-product.jpg' %}" alt="No image" class="img-fluid rounded">
+            {% endif %}
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <h1 class="display-5">{{ product.name }}</h1>
+            <p class="text-muted">Category: {{ product.category.name }}</p>
+            <h3 class="text-primary">${{ product.price }}</h3>
+
+            {% if product.description %}
+                <p class="mt-4">{{ product.description|linebreaks }}</p>
+            {% endif %}
+
+             <!-- Add to Cart   -->
+                <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg btn-success mt-3">Add to Cart</button>
+            </form>
+
+            <!-- Meta Info -->
+            <p class="text-muted mt-3">Added on {{ product.created|date:"F j, Y" }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

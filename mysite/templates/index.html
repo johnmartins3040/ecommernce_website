@@ -1,0 +1,66 @@
+   {% extends 'base.html' %}
+
+   
+   {% block content %}
+   
+      <!-- fashion section start -->
+      <div class="fashion_section">
+         <div id="main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+
+               {% if query %}
+                  <h2>Search Results for "{{ query }}"</h2>
+               {% endif %}
+
+               {% for category in categories %}
+               <div class="carousel-item active">
+                  <div class="container">
+                        <h1 class="fashion_taital"> {{ category.name }}</h1>
+                        <div class="fashion_section_2">
+                           <div class="row">
+                              {% for product in category.search_products %}  
+                              <div class="col-lg-4 col-sm-4">
+                              <div class="box_main" ; style="border-radius: 20px;">
+                                 <h4 class="shirt_text">{{ product.name }}</h4>
+                                 <p class="price_text">Price  <span style="color: #262626;">$ {{ product.price }}</span></p>
+                                 <div class="tshirt_img"><img src="{{ product.image.url }}" style="height: 600px; object-fit: cover; object-position: center"; loading="lazy"></div>
+                                 <div class="btn_main">
+                                    <!-- <div class="buy_bt"><a href="#">Buy Now</a></div> -->
+                                      <!-- Add to Cart   -->
+                                    <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                                    {% csrf_token %}
+                                    <!-- <button type="submit" class="btn btn-lg btn-success mt-3">Add to Cart</button> -->
+                                    <div class="buy_bt" type="submit"><a href="{% url 'add_to_cart' product.id  %}">Buy Now</a></div>
+                                     </form>
+                                    <div class="seemore_bt"><a href="{% url 'product_detail' product.slug %}">Details</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% empty %}
+                               <p>No products found in this category.</p>
+                           {% endfor %}   
+                           
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+
+              
+            </div>
+            <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+            </a>
+            <div class="loader_main">
+               <div class="loader"></div>
+            </div>
+         </div>
+      </div>
+   
+{% endblock %}
+
+

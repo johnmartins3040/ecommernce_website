@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<!-- <h2>{{ title }}</h2> -->
+
+
+<!-- jewellery  section start -->
+      <div class="jewellery_section">
+         <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">{{ Category.name }}</h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                          {% for Product in products %}  
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main"; style="border-radius: 20px;">
+                                 <h4 class="shirt_text">{{ Product.name }}</h4>
+                                 <p class="price_text">Start Price  <span style="color: #262626;">$ {{ Product.price }}</span></p>
+                                 <div class="jewellery_img"><img src="{{ Product.image.url }}" style="height: 600px; object-fit: cover; object-position: center;"></div>
+                                 <div class="btn_main">
+                        
+                                    <form method="POST" action="{% url 'add_to_cart' Product.id %}?buy_now=1">
+                                       {% csrf_token %}
+                                       <!-- <button type="submit" class="buy_bt btn btn-primary">Buy Now</button> -->
+                                       <div class="buy_bt" type="submit"><a href="{% url 'add_to_cart' Product.id %}">Buy Now</a></div>
+                                    </form>
+
+                                    <div class="seemore_bt"><a href="{% url 'product_detail' Product.slug %}">Details</a></div>
+                                 </div>
+
+                              </div>
+                              </div>
+                           
+                                 {% empty %}
+                                    <div class="col-12 text-center">
+                                          {% if request.GET.q %}
+                                             <h2>Item not found for "{{ request.GET.q }}"</h2>
+                                          {% else %}
+                                             <h2>No available product.</h2>
+                                          {% endif %}
+                                    </div>
+                                 {% endfor %}
+                        </div>
+                            </div>
+                          </div>
+                          
+                  </div>
+                
+               </div>
+               
+               
+            <!-- </div>
+            <a class="carousel-control-prev" href="#jewellery_main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#jewellery_main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+            </a> -->
+            <div class="loader_main">
+               <div class="loader"></div>
+            </div>
+         </div>
+      </div>
+      <!-- jewellery  section end -->
+
+
+{% endblock %}

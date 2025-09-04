@@ -1,0 +1,83 @@
+
+{% extends "base_cart.html" %}
+
+{% block style %}
+<style>
+
+.whatsapp-card:hover {
+    transform: translateY(-5px);
+    background-color: #e9f9ee;
+    transition: all 0.3s ease;
+}
+
+.email-card:hover {
+    transform: translateY(-5px);
+    background-color: #eef4ff;
+    transition: all 0.3s ease;
+}
+
+.phone-card:hover {
+    transform: translateY(-5px);
+    background-color: #ffecec;
+    transition: all 0.3s ease;
+}
+
+.card {
+    cursor: pointer;
+    border-radius: 12px;
+}
+</style>
+{% endblock %}
+
+{% block dontshow %}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">Customer Care</h2>
+        <p class="text-muted">We’re here to help you! Choose a contact method below.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <!-- WhatsApp Card -->
+        <div class="col-md-4 col-10 mb-3">
+            <a href="https://wa.me/+2348052179122?text=Hello%20I%20need%20help%20with%20my%20order" 
+               target="_blank" class="card text-center shadow-lg border-0 whatsapp-card">
+                <div class="card-body">
+                    <i class="fab fa-whatsapp fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Chat on WhatsApp</h5>
+                    <p class="card-text text-muted">Get instant support on WhatsApp.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Email Card -->
+        <div class="col-md-4 col-10 mb-3">
+            <a  href="https://mail.google.com/mail/?view=cm&fs=1&to=johnmartinschigozie492@gmail.com" target="_blank" 
+               class="card text-center shadow-lg border-0 email-card">
+                <div class="card-body">
+                    <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Send Email</h5>
+                    <p class="card-text text-muted">Reach us via email for detailed queries.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Phone Card -->
+        <div class="col-md-4 col-10 mb-3">
+            <a href="tel:+2348052179122" 
+               class="card text-center shadow-lg border-0 phone-card">
+                <div class="card-body">
+                    <i class="fas fa-phone fa-3x text-danger mb-3"></i>
+                    <h5 class="card-title">Call Us</h5>
+                    <p class="card-text text-muted">Speak directly with our support team.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+{% endblock %}
